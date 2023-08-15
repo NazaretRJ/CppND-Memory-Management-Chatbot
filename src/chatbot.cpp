@@ -86,13 +86,13 @@ ChatBot::ChatBot(ChatBot &&chatbot)
     _chatLogic = chatbot._chatLogic;
     _rootNode = chatbot._rootNode;
 
+    _chatLogic->SetChatbotHandle(this);
+
     // deep copy image
     _image = new wxBitmap(*chatbot._image);
 
     chatbot._chatLogic = nullptr;
     chatbot._rootNode = nullptr;
-
-    delete chatbot._image;
 }
 
 // Task 2 Move assigment.
@@ -107,14 +107,13 @@ ChatBot& ChatBot::operator=(ChatBot &&chatbot)
 
     _chatLogic = chatbot._chatLogic;
     _rootNode = chatbot._rootNode;
+    _chatLogic->SetChatbotHandle(this);
 
     // deep copy image
     _image = new wxBitmap(*chatbot._image);
 
     chatbot._chatLogic = nullptr;
     chatbot._rootNode = nullptr;
-
-    delete chatbot._image;
 
     return *this;
 }
